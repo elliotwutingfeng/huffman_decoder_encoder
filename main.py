@@ -55,13 +55,13 @@ def parse_args(args):
 if __name__ == "__main__":
     parser = parse_args(sys.argv[1:])
     try:
-        with open(parser.input_file, "r") as f:
+        with open(parser.input_file, "r", encoding="utf-8") as f:
             compressed = Huffman.compress(f.read())
     except OSError as e:
         raise e
 
     try:
-        with open(parser.output_file, "wb") as f:
+        with open(parser.output_file, "wb", encoding="utf-8") as f:
             f.write(compressed)
     except OSError as e:
         raise e

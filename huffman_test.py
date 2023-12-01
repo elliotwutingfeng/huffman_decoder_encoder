@@ -71,7 +71,7 @@ class TestHello(unittest.TestCase):
         assert decompressed == self.sample_body
 
     def test_integration(self):
-        with open("135-0.txt", "r") as f:
+        with open("135-0.txt", "r", encoding="utf-8") as f:
             body = f.read()
         compressed = Huffman.compress(body)
         decompressed = Huffman.decompress(compressed)
