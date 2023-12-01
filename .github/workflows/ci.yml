@@ -1,0 +1,25 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test-and-coverage:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Python requirements
+      run: pip install -r requirements.txt
+    - name: Test
+      run: |
+        pytest --cov --timeout 30 -k test_unit
+        pytest --timeout 30 -k test_integration
+    - name: Upload coverage to Codecov (ubuntu-latest only)
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+      uses: codecov/codecov-action@v3
