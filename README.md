@@ -8,24 +8,26 @@ Toy implementation of a [Huffman Decoder/Encoder](https://en.wikipedia.org/wiki/
 
 ## Requirements
 
-Python 3.10
+Python 3.10+
 
 ## Setup
 
 ```shell
-pip install -r requirements.txt
+python3 -m venv venv
+venv/bin/python3 -m pip install --upgrade pip
+venv/bin/python3 -m pip install -r requirements.txt
 ```
 
 ## Testing
 
 ```shell
-pytest --cov --timeout 30 -k test_unit
+venv/bin/python3 -m pytest --cov --timeout 30 -k test_unit
 ```
 
 ## Usage
 
 ```shell
-python main.py --input-file content_to_compress.txt --output-file output
+venv/bin/python3 main.py --input-file content_to_compress.txt --output-file output
 ```
 
 ## How does this compare to xz?
